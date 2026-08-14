@@ -71,6 +71,7 @@ public class ExpenseBot extends TelegramLongPollingBot {
         KeyboardRow row = new KeyboardRow();
         row.add("/today");
         row.add("/month");
+        row.add("/budget");
 
         keyboard.add(row);
         keyboardMarkup.setKeyboard(keyboard);

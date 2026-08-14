@@ -96,5 +96,25 @@ public class ExpenseService {
     }
 
 
+    // الميثود دي هترجع إجمالي مصاريف الشهر كرقم عشان نقدر نخصمه من الميزانية
+    public BigDecimal getTotalMonthExpenses(Long userId) {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfMonth = today.withDayOfMonth(1).atStartOfDay();
+
+        // بنستخدم YearMonth عشان يعرف الشهر ده كام يوم
+        LocalDateTime endOfMonth = YearMonth.from(today).atEndOfMonth().atTime(LocalTime.MAX);
+
+        // بنجيب المصاريف من الداتا بيز
+        List<Expense> monthExpenses = expenseRepository.findByUserIdAndCreatedAtBetween(userId, startOfMonth, endOfMonth);
+
+        // بنجمع المصاريف
+        BigDecimal total = BigDecimal.ZERO;
+        for (Expense exp : monthExpenses) {
+            total = total.add(exp.getAmount());
+        }
+
+        return total;
+    }
+
 
 }
