@@ -72,6 +72,7 @@ public class ExpenseBot extends TelegramLongPollingBot {
         row.add("/today");
         row.add("/month");
         row.add("/budget");
+        row.add("/mohamed");
 
         keyboard.add(row);
         keyboardMarkup.setKeyboard(keyboard);
